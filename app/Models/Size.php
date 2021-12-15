@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Info\ProductAttr;
 use App\Models\Info\SizeAttr;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -27,6 +28,6 @@ class Size extends Model
 
     public function colors()
     {
-        return $this->belongsToMany(Color::class);
+        return $this->belongsToMany(Color::class)->withPivot(ProductAttr::QUANTITY, ProductAttr::ID);
     }
 }

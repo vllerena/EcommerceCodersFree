@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             ColorSeeder::class,
             ColorProductSeeder::class,
             SizeSeeder::class,
+            ColorSizeSeeder::class,
         ]);
     }
 }
