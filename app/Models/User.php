@@ -39,4 +39,9 @@ class User extends Authenticatable
     protected $appends = [
         UserAttr::PROFILE_PHOTO_PATH,
     ];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }
