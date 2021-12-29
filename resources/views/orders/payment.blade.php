@@ -7,6 +7,10 @@
         MercadoPago\SDK::setAccessToken(config('services.mercado_pago.token'));
         // Crea un objeto de preferencia
         $preference = new MercadoPago\Preference();
+        $shipments = new MercadoPago\Shipments();
+        $shipments->cost = $order->shipping_cost;
+        $shipments->mode = "not_specified";
+        $preference->shipments = $shipments;
         // Crea un ítem en la preferencia
         foreach ($items as $product) {
             $item = new MercadoPago\Item();
@@ -16,7 +20,7 @@
             $products[] = $item;
         }
         $preference->back_urls = array(
-            "success" => "https://www.tu-sitio/success",
+            "success" => route('orders.pay', $order),
             "failure" => "http://www.tu-sitio/failure",
             "pending" => "http://www.tu-sitio/pending"
         );
@@ -25,42 +29,43 @@
         $preference->save();
     @endphp
 
-    <div class="container py-8">
-        <div class="bg-white rounded-lg shadow-lg px-6 py-4 mb-6">
-            <p class="text-gray-700 uppercase"><span class="font-semibold">Número de orden:</span> Orden - {{$order->id}}</p>
-        </div>
-        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
-            <div class="grid grid-cols-2 gap-6 text-gray-700">
-                <div>
-                    <p class="text-lg font-semibold uppercase">Envío</p>
-                    @if($order->shipping_type == 1)
-                        <p class="text-sm">Los productos deben ser recogidos en tienda.</p>
-                        <p class="text-sm">Jr. Argentina #371, Cajamarca</p>
-                    @else
-                        <p class="text-sm">Los productos serán enviados a:</p>
-                        <p class="text-sm">{{$order->address}}</p>
-                        <p>{{$order->department->name}} - {{$order->city->name}} - {{$order->district->name}}</p>
-                    @endif
-                </div>
-                <div>
-                    <p class="text-lg font-semibold uppercase">Datos de contacto</p>
-                    <p class="text-sm">Persona que recibirá el producto: {{$order->contact}}</p>
-                    <p class="text-sm">Teléfono del contacto: {{$order->phone}}</p>
+    <div class="grid grid-cols-5 gap-6 container py-8">
+        <div class="col-span-3">
+            <div class="bg-white rounded-lg shadow-lg px-6 py-4 mb-6">
+                <p class="text-gray-700 uppercase"><span class="font-semibold">Número de orden:</span> Orden - {{$order->id}}</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="grid grid-cols-2 gap-6 text-gray-700">
+                    <div>
+                        <p class="text-lg font-semibold uppercase">Envío</p>
+                        @if($order->shipping_type == 1)
+                            <p class="text-sm">Los productos deben ser recogidos en tienda.</p>
+                            <p class="text-sm">Jr. Argentina #371, Cajamarca</p>
+                        @else
+                            <p class="text-sm">Los productos serán enviados a:</p>
+                            <p class="text-sm">{{$order->address}}</p>
+                            <p>{{$order->department->name}} - {{$order->city->name}} - {{$order->district->name}}</p>
+                        @endif
+                    </div>
+                    <div>
+                        <p class="text-lg font-semibold uppercase">Datos de contacto</p>
+                        <p class="text-sm">Persona que recibirá el producto: {{$order->contact}}</p>
+                        <p class="text-sm">Teléfono del contacto: {{$order->phone}}</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="bg-white rounded-lg shadow-lg p-6 text-gray-700 mb-6">
-            <p class="text-xl font-semibold mb-4">Resumen</p>
-            <table class="table-auto w-full">
-                <thead>
+            <div class="bg-white rounded-lg shadow-lg p-6 text-gray-700 mb-6">
+                <p class="text-xl font-semibold mb-4">Resumen</p>
+                <table class="table-auto w-full">
+                    <thead>
                     <tr>
                         <th></th>
                         <th>Precio</th>
                         <th>Cant.</th>
                         <th>Total</th>
                     </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-200">
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
                     @foreach($items as $item)
                         <tr>
                             <td>
@@ -90,22 +95,27 @@
                             </td>
                         </tr>
                     @endforeach
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="bg-white rounded-lg shadow-lg p-6 flex justify-between items-center">
-            <img class="h-8" src="{{asset('img/MC_VI_DI_2-1.jpg')}}" alt="" />
-            <div class="text-gray-700 text-right">
-                <p class="text-sm font-semibold">Subtotal: S/. {{$order->total - $order->shipping_cost}}</p>
-                <p class="text-sm font-semibold">Envío: S/. {{$order->shipping_cost}}</p>
-                <p class="text-lg font-semibold uppercase">Total: S/. {{$order->total}}</p>
-                <div class="cho-container">
-
+        <div class="col-span-2">
+            <div class="bg-white rounded-lg shadow-lg px-6 pt-6">
+                <div class="flex justify-between items-center mb-6">
+                    <img class="h-8" src="{{asset('img/MC_VI_DI_2-1.jpg')}}" alt="" />
+                    <div class="text-gray-700 text-right">
+                        <p class="text-sm font-semibold">Subtotal: S/. {{$order->total - $order->shipping_cost}}</p>
+                        <p class="text-sm font-semibold">Envío: S/. {{$order->shipping_cost}}</p>
+                        <p class="text-lg font-semibold uppercase">Total: S/. {{$order->total}}</p>
+                        <div class="cho-container mt-2"></div>
+                    </div>
                 </div>
+                <div id="paypal-button-container"></div>
             </div>
         </div>
     </div>
     <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id={{config('services.paypal.client_id')}}&currency=USD"></script>
     <script>
         const mp = new MercadoPago("{{config('services.mercado_pago.key')}}", {
             locale: 'es-PE'
@@ -118,8 +128,30 @@
             },
             render: {
                 container: '.cho-container', // Indica el nombre de la clase donde se mostrará el botón de pago
-                label: 'Pagar', // Cambia el texto del botón de pago (opcional)
+                label: 'Comprar Ahora',
             }
         });
+
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: "{{$order->total}}"
+                        }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(orderData) {
+                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                    var transaction = orderData.purchase_units[0].payments.captures[0];
+                    var element = document.getElementById('paypal-button-container');
+                    element.innerHTML = '';
+                    element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                    // Or go to another URL:  actions.redirect('thank_you.html');
+                });
+            }
+        }).render('#paypal-button-container');
     </script>
 </x-app-layout>
