@@ -29,6 +29,8 @@ class Order extends Model
 
     protected $fillable = [
         OrderAttr::USER_ID,
+        OrderAttr::CONTACT,
+        OrderAttr::PHONE,
         OrderAttr::STATUS,
         OrderAttr::SHIPPING_TYPE,
         OrderAttr::SHIPPING_COST,
@@ -38,6 +40,7 @@ class Order extends Model
         OrderAttr::CITY_ID,
         OrderAttr::DISTRICT_ID,
         OrderAttr::ADDRESS,
+        OrderAttr::REFERENCES,
     ];
 
     public function department()

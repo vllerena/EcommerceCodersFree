@@ -21,24 +21,27 @@ class CreateOrdersTable extends Migration
                 ->constrained(UserAttr::TABLE_NAME, UserAttr::ID)
                 ->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
+            $table->string(OrderAttr::CONTACT);
+            $table->string(OrderAttr::PHONE);
             $table->enum(OrderAttr::STATUS, [Order::PENDIENTE, Order::RECIBIDO, Order::ENVIADO, Order::ENTREGADO, Order::ANULADO])->default(Order::PENDIENTE);
             $table->enum(OrderAttr::SHIPPING_TYPE, [1, 2]);
             $table->float(OrderAttr::SHIPPING_COST);
             $table->float(OrderAttr::TOTAL);
             $table->json(OrderAttr::CONTENT);
-            $table->foreignId(OrderAttr::DEPARTMENT_ID)
+            $table->foreignId(OrderAttr::DEPARTMENT_ID)->nullable()
                 ->constrained(DepartmentAttr::TABLE_NAME, DepartmentAttr::ID)
                 ->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
-            $table->foreignId(OrderAttr::CITY_ID)
+            $table->foreignId(OrderAttr::CITY_ID)->nullable()
                 ->constrained(CityAttr::TABLE_NAME, CityAttr::ID)
                 ->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
-            $table->foreignId(OrderAttr::DISTRICT_ID)
+            $table->foreignId(OrderAttr::DISTRICT_ID)->nullable()
                 ->constrained(DistrictAttr::TABLE_NAME, DistrictAttr::ID)
                 ->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
-            $table->string(OrderAttr::ADDRESS);
+            $table->string(OrderAttr::ADDRESS)->nullable();
+            $table->string(OrderAttr::REFERENCES)->nullable();
             $table->timestamps();
         });
     }
