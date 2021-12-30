@@ -12,6 +12,7 @@ class PaymentOrder extends Component
     use AuthorizesRequests;
 
     public $order;
+
     protected $listeners = ['payOrder'];
 
     public function mount(Order $order)
@@ -28,7 +29,10 @@ class PaymentOrder extends Component
 
     public function render()
     {
+        $this->authorize('author', $this->order);
+        $this->authorize('payment', $this->order);
         $items = json_decode($this->order->content);
-        return view('livewire.payment-order', compact('items'));
+        $envio = json_decode($this->order->envio);
+        return view('livewire.payment-order', compact('items', 'envio'));
     }
 }
