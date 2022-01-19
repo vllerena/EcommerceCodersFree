@@ -18,7 +18,6 @@ class Subcategory extends Model
     protected $fillable = [
         SubcategoryAttr::NAME,
         SubcategoryAttr::SLUG,
-        SubcategoryAttr::IMAGE,
         SubcategoryAttr::CATEGORY_ID,
         SubcategoryAttr::COLOR,
         SubcategoryAttr::SIZE,

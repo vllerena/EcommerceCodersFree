@@ -41,6 +41,7 @@ class Order extends Model
         OrderAttr::DISTRICT_ID,
         OrderAttr::ADDRESS,
         OrderAttr::REFERENCES,
+        OrderAttr::SEND,
     ];
 
     public function department()

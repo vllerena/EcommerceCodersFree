@@ -15,7 +15,6 @@ class CreateSubcategoriesTable extends Migration
             $table->id(SubcategoryAttr::ID);
             $table->string(SubcategoryAttr::NAME);
             $table->string(SubcategoryAttr::SLUG);
-            $table->string(SubcategoryAttr::IMAGE);
             $table->foreignId(SubcategoryAttr::CATEGORY_ID)
                 ->constrained(CategoryAttr::TABLE_NAME, CategoryAttr::ID)
                 ->onUpdate('CASCADE')

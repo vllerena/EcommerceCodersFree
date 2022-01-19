@@ -14,7 +14,7 @@ class CategoryFilter extends Component
 
     public $category, $subcategoria, $marca;
 
-    public $view = "grid";
+    public $view = "list";
 
     protected $queryString = ['subcategoria', 'marca'];
 

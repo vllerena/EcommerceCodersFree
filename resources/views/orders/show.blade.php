@@ -49,8 +49,8 @@
                         <p class="text-sm">Jr. Argentina #371, Cajamarca</p>
                     @else
                         <p class="text-sm">Los productos serán enviados a:</p>
-                        <p class="text-sm">{{$order->address}}</p>
-                        <p>{{$order->department->name}} - {{$order->city->name}} - {{$order->district->name}}</p>
+                        <p class="text-sm">{{$send->address}}</p>
+                        <p>{{$send->department}} - {{$send->city}} - {{$send->district}}</p>
                     @endif
                 </div>
                 <div>

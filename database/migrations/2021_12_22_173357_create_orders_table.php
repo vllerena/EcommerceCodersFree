@@ -28,20 +28,21 @@ class CreateOrdersTable extends Migration
             $table->float(OrderAttr::SHIPPING_COST);
             $table->float(OrderAttr::TOTAL);
             $table->json(OrderAttr::CONTENT);
-            $table->foreignId(OrderAttr::DEPARTMENT_ID)->nullable()
-                ->constrained(DepartmentAttr::TABLE_NAME, DepartmentAttr::ID)
-                ->onUpdate('CASCADE')
-                ->onDelete('CASCADE');
-            $table->foreignId(OrderAttr::CITY_ID)->nullable()
-                ->constrained(CityAttr::TABLE_NAME, CityAttr::ID)
-                ->onUpdate('CASCADE')
-                ->onDelete('CASCADE');
-            $table->foreignId(OrderAttr::DISTRICT_ID)->nullable()
-                ->constrained(DistrictAttr::TABLE_NAME, DistrictAttr::ID)
-                ->onUpdate('CASCADE')
-                ->onDelete('CASCADE');
-            $table->string(OrderAttr::ADDRESS)->nullable();
-            $table->string(OrderAttr::REFERENCES)->nullable();
+//            $table->foreignId(OrderAttr::DEPARTMENT_ID)->nullable()
+//                ->constrained(DepartmentAttr::TABLE_NAME, DepartmentAttr::ID)
+//                ->onUpdate('CASCADE')
+//                ->onDelete('CASCADE');
+//            $table->foreignId(OrderAttr::CITY_ID)->nullable()
+//                ->constrained(CityAttr::TABLE_NAME, CityAttr::ID)
+//                ->onUpdate('CASCADE')
+//                ->onDelete('CASCADE');
+//            $table->foreignId(OrderAttr::DISTRICT_ID)->nullable()
+//                ->constrained(DistrictAttr::TABLE_NAME, DistrictAttr::ID)
+//                ->onUpdate('CASCADE')
+//                ->onDelete('CASCADE');
+            $table->json(OrderAttr::SEND)->nullable();
+//            $table->string(OrderAttr::ADDRESS)->nullable();
+//            $table->string(OrderAttr::REFERENCES)->nullable();
             $table->timestamps();
         });
     }

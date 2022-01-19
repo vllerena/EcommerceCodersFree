@@ -27,7 +27,8 @@ class OrderController extends Controller
     {
         $this->authorize('author', $order);
         $items = json_decode($order->content);
-        return view('orders.show', compact('order', 'items'));
+        $send = json_decode($order->send);
+        return view('orders.show', compact('order', 'items', 'send'));
     }
 
     public function pay(Order $order, Request $request)

@@ -76,11 +76,18 @@ class CreateOrder extends Component
 
         if ($this->shipping_type == 2) {
             $order[OrderAttr::SHIPPING_COST] = $this->shipping_cost;
-            $order[OrderAttr::DEPARTMENT_ID] = $this->department_id;
-            $order[OrderAttr::CITY_ID] = $this->city_id;
-            $order[OrderAttr::DISTRICT_ID] = $this->district_id;
-            $order[OrderAttr::ADDRESS] = $this->address;
-            $order[OrderAttr::REFERENCES] = $this->references;
+//            $order[OrderAttr::DEPARTMENT_ID] = $this->department_id;
+//            $order[OrderAttr::CITY_ID] = $this->city_id;
+//            $order[OrderAttr::DISTRICT_ID] = $this->district_id;
+//            $order[OrderAttr::ADDRESS] = $this->address;
+//            $order[OrderAttr::REFERENCES] = $this->references;
+            $order[OrderAttr::SEND] = json_encode([
+               'department' => Department::find($this->department_id)->name,
+               'city' => City::find($this->city_id)->name,
+               'district' => District::find($this->district_id)->name,
+               'address' => $this->address,
+               'references' => $this->references,
+            ]);
         }
 
         $order->save();

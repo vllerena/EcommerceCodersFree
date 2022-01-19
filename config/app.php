@@ -57,6 +57,7 @@ return [
          */
         Jenssegers\Date\DateServiceProvider::class,
         Laraveles\Spanish\SpanishServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
         /*
          * Application Service Providers...

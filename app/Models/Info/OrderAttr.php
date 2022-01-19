@@ -19,6 +19,7 @@ class OrderAttr
     const DISTRICT_ID = 'district_id';
     const ADDRESS = 'address';
     const REFERENCES = 'references';
+    const SEND = 'send';
     const UPDATED_AT = 'updated_at';
     const CREATED_AT = 'created_at';
 }

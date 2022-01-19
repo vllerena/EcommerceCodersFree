@@ -8,7 +8,6 @@ class SubcategoryAttr
     const ID = 'id';
     const NAME = 'name';
     const SLUG = 'slug';
-    const IMAGE = 'image';
     const CATEGORY_ID = 'category_id';
     const COLOR = 'color';
     const SIZE = 'size';
