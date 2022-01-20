@@ -26,7 +26,7 @@
                                     <p>- Talla: {{$item->options['size']}}</p>
                                 @endisset
                             </div>
-                            <p>USD {{$item->price}}</p>
+                            <p>S/. {{$item->price}}</p>
                         </article>
                     </li>
                 @empty

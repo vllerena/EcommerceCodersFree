@@ -137,7 +137,7 @@
                     </td>
 
                     <td class="text-center">
-                        {{ $item->price }} USD
+                        {{ $item->price }} S/.
                     </td>
 
                     <td class="text-center">
@@ -145,7 +145,7 @@
                     </td>
 
                     <td class="text-center">
-                        {{ $item->price * $item->qty }} USD
+                        {{ $item->price * $item->qty }} S/.
                     </td>
                 </tr>
             @endforeach

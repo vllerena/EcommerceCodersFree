@@ -12,7 +12,7 @@ class UserAttr
     const PASSWORD = 'password';
     const REMEMBER_TOKEN = 'remember_token';
     const CURRENT_TEAM_ID = 'current_team_id';
-    const PROFILE_PHOTO_PATH = 'profile_photo_path';
+    const PROFILE_PHOTO_PATH = 'profile_photo_url';
     const TWO_FACTOR_RECOVERY_CODES = 'two_factor_recovery_codes';
     const TWO_FACTOR_SECRET = 'two_factor_secret';
     const UPDATED_AT = 'updated_at';

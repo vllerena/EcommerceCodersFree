@@ -115,7 +115,7 @@
     </div>
     @push('script')
         <script src="https://sdk.mercadopago.com/js/v2"></script>
-        <script src="https://www.paypal.com/sdk/js?client-id={{config('services.paypal.client_id')}}&currency=USD"></script>
+        <script src="https://www.paypal.com/sdk/js?client-id={{config('services.paypal.client_id')}}&currency=S/."></script>
         <script>
             const mp = new MercadoPago("{{config('services.mercado_pago.key')}}", {
                 locale: 'es-PE'

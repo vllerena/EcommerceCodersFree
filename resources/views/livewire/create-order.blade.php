@@ -114,7 +114,7 @@
                                 <p>- Talla: {{$item->options['size']}}</p>
                             @endisset
                         </div>
-                        <p>USD {{$item->price}}</p>
+                        <p>S/. {{$item->price}}</p>
                     </article>
                 </li>
             @empty
@@ -147,7 +147,7 @@
                     @if ($shipping_type == 1)
                         S/. {{Cart::subtotal()}}
                     @else
-                        S/. {{Cart::subtotal() + $shipping_cost}}
+                        S/. {{number_format(filter_var(Cart::subtotal(), FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) + $shipping_cost, 2, ".", ",")}}
                     @endif
                 </p>
             </div>

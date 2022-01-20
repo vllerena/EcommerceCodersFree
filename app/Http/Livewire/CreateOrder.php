@@ -71,7 +71,7 @@ class CreateOrder extends Component
         $order[OrderAttr::PHONE] = $this->phone;
         $order[OrderAttr::SHIPPING_TYPE] = $this->shipping_type;
         $order[OrderAttr::SHIPPING_COST] = $this->shipping_cost;
-        $order[OrderAttr::TOTAL] = $this->shipping_cost + Cart::subtotal();
+        $order[OrderAttr::TOTAL] = filter_var(Cart::subtotal(), FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) + $this->shipping_cost;
         $order[OrderAttr::CONTENT] = Cart::content();
 
         if ($this->shipping_type == 2) {

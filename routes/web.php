@@ -10,6 +10,7 @@ use App\Http\Controllers\WebhooksController;
 use App\Http\Livewire\ShoppingCart;
 use App\Http\Livewire\CreateOrder;
 use App\Http\Livewire\PaymentOrder;
+use App\Http\Controllers\ReviewController;
 
 Route::get('/', HomeController::class)->name('index');
 Route::get('categories/{category}', [CategoryController::class, 'show'])->name('category.show');
@@ -25,3 +26,6 @@ Route::middleware(['auth'])->group(function (){
     Route::get('orders/{order}/pay', [OrderController::class, 'pay'])->name('orders.pay');
     Route::post('webhooks', WebhooksController::class)->name('webhooks');
 });
+
+Route::post('reviews/{product}', [ReviewController::class, 'store'])->name('reviews');
+
