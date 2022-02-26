@@ -14,35 +14,41 @@ class CategorySeeder extends Seeder
     {
         $categories = [
             [
-                CategoryAttr::NAME => 'Celulares y tables',
-                CategoryAttr::SLUG => Str::slug('Celulares y tables'),
-                CategoryAttr::ICON => '<i class="fas fa-mobile-alt"></i>',
-            ],
-            [
-                CategoryAttr::NAME => 'TV, Audio y Video',
-                CategoryAttr::SLUG => Str::slug('TV, Audio y Video'),
-                CategoryAttr::ICON => '<i class="fas fa-tv"></i>',
-            ],
-            [
-                CategoryAttr::NAME => 'Consola y Videojuegos',
-                CategoryAttr::SLUG => Str::slug('Consola y Videojuegos'),
-                CategoryAttr::ICON => '<i class="fas fa-gamepad"></i>',
-            ],
-            [
-                CategoryAttr::NAME => 'Computación',
-                CategoryAttr::SLUG => Str::slug('Computación'),
+                CategoryAttr::NAME => 'Laptops y Tablets',
+                CategoryAttr::SLUG => Str::slug('Laptops y Tablets'),
                 CategoryAttr::ICON => '<i class="fas fa-laptop"></i>',
             ],
             [
-                CategoryAttr::NAME => 'Moda',
-                CategoryAttr::SLUG => Str::slug('Moda'),
-                CategoryAttr::ICON => '<i class="fas fa-tshirt"></i>',
+                CategoryAttr::NAME => 'Computadoras',
+                CategoryAttr::SLUG => Str::slug('Computadoras'),
+                CategoryAttr::ICON => '<i class="fas fa-desktop"></i>',
+            ],
+            [
+                CategoryAttr::NAME => 'Gamer',
+                CategoryAttr::SLUG => Str::slug('Gamer'),
+                CategoryAttr::ICON => '<i class="fas fa-gamepad"></i>',
+            ],
+            [
+                CategoryAttr::NAME => 'Partes de PC',
+                CategoryAttr::SLUG => Str::slug('Partes de PC'),
+                CategoryAttr::ICON => '<i class="fas fa-hdd-o"></i>',
+            ],
+            [
+                CategoryAttr::NAME => 'Monitores',
+                CategoryAttr::SLUG => Str::slug('Monitores'),
+                CategoryAttr::ICON => '<i class="fas fa-television"></i>',
+            ],
+            [
+                CategoryAttr::NAME => 'Impresoras',
+                CategoryAttr::SLUG => Str::slug('Impresoras'),
+                CategoryAttr::ICON => '<i class="fas fa-print"></i>',
             ],
         ];
 
         foreach ($categories as $category) {
             $category = Category::factory(1)->create($category)->first();
-            $brands = Brand::factory(4)->create();
+//            $brands = Brand::factory(1)->create();
+            $brands = Brand::all();
             foreach ($brands as $brand){
                 $brand->categories()->attach($category->id);
             }

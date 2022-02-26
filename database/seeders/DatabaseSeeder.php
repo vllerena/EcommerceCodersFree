@@ -20,14 +20,17 @@ class DatabaseSeeder extends Seeder
         Storage::makeDirectory(SubcategoryAttr::TABLE_NAME);
         $this->call([
             UserSeeder::class,
+            BrandSeeder::class,
             CategorySeeder::class,
             SubcategorySeeder::class,
-            ProductSeeder::class,
-            ColorSeeder::class,
-            ColorProductSeeder::class,
-            SizeSeeder::class,
-            ColorSizeSeeder::class,
+//            ProductSeeder::class,
+//            ColorSeeder::class,
+//            ColorProductSeeder::class,
+//            SizeSeeder::class,
+//            ColorSizeSeeder::class,
             DepartmentSeeder::class,
+            CitySeeder::class,
+            DistrictSeeder::class,
         ]);
     }
 }
